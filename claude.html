@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP Stagger Animation Demo</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+        max-width: 800px;
+      }
+
+      .demo-title {
+        text-align: center;
+        color: #333;
+        margin: 0 0 1rem;
+      }
+
+      .demo-section {
+        background-color: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .controls {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      button {
+        background-color: #4f46e5;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.2s;
+      }
+
+      button:hover {
+        background-color: #4338ca;
+      }
+
+      .box-container {
+        display: flex;
+        gap: 0.5rem;
+        margin: 1rem 0;
+      }
+
+      .box {
+        width: 50px;
+        height: 50px;
+        background-color: #4f46e5;
+        border-radius: 4px;
+        opacity: 0;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0.5rem;
+      }
+
+      .grid-box {
+        aspect-ratio: 1;
+        background-color: #4f46e5;
+        border-radius: 4px;
+        opacity: 0;
+      }
+
+      .text-container {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #4f46e5;
+        height: 3rem;
+        overflow: hidden;
+      }
+
+      .text-letter {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(100%);
+      }
+
+      .info {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .code-section {
+        background-color: #f8f8f8;
+        padding: 1rem;
+        border-radius: 4px;
+        margin-top: 1rem;
+        font-family: monospace;
+        font-size: 0.9rem;
+        white-space: pre;
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="demo-title">GSAP Stagger Animations</h1>
+
+      <!-- Basic Stagger -->
+      <div class="demo-section">
+        <h2>Basic Stagger</h2>
+        <div class="controls">
+          <button id="basicPlay">Play</button>
+          <button id="basicReset">Reset</button>
+        </div>
+        <div class="box-container" id="basicStagger">
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+        </div>
+        <div class="info">
+          Simple left-to-right stagger with 0.1s delay between elements
+        </div>
+        <div class="code-section">
+          gsap.to(".box", { opacity: 1, duration: 0.5, stagger: 0.1 });
+        </div>
+      </div>
+
+      <!-- Stagger From Center -->
+      <div class="demo-section">
+        <h2>Stagger From Center</h2>
+        <div class="controls">
+          <button id="centerPlay">Play</button>
+          <button id="centerReset">Reset</button>
+        </div>
+        <div class="box-container" id="centerStagger">
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+        </div>
+        <div class="info">Animation radiates from the center</div>
+        <div class="code-section">
+          gsap.to(".box", { opacity: 1, duration: 0.5, stagger: { amount: 1,
+          from: "center" } });
+        </div>
+      </div>
+
+      <!-- Grid Stagger -->
+      <div class="demo-section">
+        <h2>Grid Stagger</h2>
+        <div class="controls">
+          <button id="gridPlay">Play</button>
+          <button id="gridReset">Reset</button>
+        </div>
+        <div class="grid-container" id="gridStagger">
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+          <div class="grid-box"></div>
+        </div>
+        <div class="info">Radial stagger from center with easing</div>
+        <div class="code-section">
+          gsap.to(".grid-box", { opacity: 1, scale: 1, duration: 0.7, stagger: {
+          amount: 1.5, from: "center", grid: "auto", ease: "power2.out" } });
+        </div>
+      </div>
+
+      <!-- Text Reveal -->
+      <div class="demo-section">
+        <h2>Text Reveal Stagger</h2>
+        <div class="controls">
+          <button id="textPlay">Play</button>
+          <button id="textReset">Reset</button>
+        </div>
+        <div class="text-container" id="textStagger">
+          <span class="text-letter">S</span>
+          <span class="text-letter">T</span>
+          <span class="text-letter">A</span>
+          <span class="text-letter">G</span>
+          <span class="text-letter">G</span>
+          <span class="text-letter">E</span>
+          <span class="text-letter">R</span>
+          <span class="text-letter">!</span>
+        </div>
+        <div class="info">Letter-by-letter text reveal animation</div>
+        <div class="code-section">
+          gsap.to(".text-letter", { opacity: 1, y: 0, duration: 0.8, stagger:
+          0.05, ease: "back.out(1.7)" });
+        </div>
+      </div>
+    </div>
+
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+
+    <script>
+      // Basic Stagger
+      document.getElementById("basicPlay").addEventListener("click", () => {
+        gsap.to("#basicStagger .box", {
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.1,
+        });
+      });
+
+      document.getElementById("basicReset").addEventListener("click", () => {
+        gsap.set("#basicStagger .box", { opacity: 0 });
+      });
+
+      // Center Stagger
+      document.getElementById("centerPlay").addEventListener("click", () => {
+        gsap.to("#centerStagger .box", {
+          opacity: 1,
+          duration: 0.5,
+          stagger: {
+            amount: 1,
+            from: "center",
+          },
+        });
+      });
+
+      document.getElementById("centerReset").addEventListener("click", () => {
+        gsap.set("#centerStagger .box", { opacity: 0 });
+      });
+
+      // Grid Stagger
+      document.getElementById("gridPlay").addEventListener("click", () => {
+        gsap.to("#gridStagger .grid-box", {
+          opacity: 1,
+          scale: 1,
+          duration: 0.7,
+          stagger: {
+            amount: 1.5,
+            from: "center",
+            grid: "auto",
+            ease: "power2.out",
+          },
+        });
+      });
+
+      document.getElementById("gridReset").addEventListener("click", () => {
+        gsap.set("#gridStagger .grid-box", { opacity: 0, scale: 0.5 });
+      });
+
+      // Text Stagger
+      document.getElementById("textPlay").addEventListener("click", () => {
+        gsap.to("#textStagger .text-letter", {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.05,
+          ease: "back.out(1.7)",
+        });
+      });
+
+      document.getElementById("textReset").addEventListener("click", () => {
+        gsap.set("#textStagger .text-letter", { opacity: 0, y: "100%" });
+      });
+
+      // Initialize all animations in reset state
+      window.addEventListener("load", () => {
+        gsap.set(".box", { opacity: 0 });
+        gsap.set(".grid-box", { opacity: 0, scale: 0.5 });
+        gsap.set(".text-letter", { opacity: 0, y: "100%" });
+      });
+    </script>
+  </body>
+</html>
