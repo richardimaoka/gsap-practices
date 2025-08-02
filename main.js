@@ -3,7 +3,9 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.to(".e", {
   scrollTrigger: {
     trigger: ".e",
-    toggleActions: "play none none reset",
+    toggleActions: "restart none none reverse",
+    markers: true,
+    scrub: true,
   },
   x: 500,
   rotation: 360,
