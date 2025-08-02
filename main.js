@@ -1,6 +1,7 @@
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.to(".box", {
-  scrollTrigger: ".box", // start animation when ".box" enters the viewport
+gsap.to(".e", {
+  scrollTrigger: ".e", // start animation when ".box" enters the viewport
   x: 500,
+  rotation: 360,
 });
